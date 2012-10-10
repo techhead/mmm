@@ -1,0 +1,18 @@
+{
+  "name": "mmm",
+  "version": "0.0.1",
+  "description": "Mustache Marked Media - View Engine for Express 3",
+  "main": "mmm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "dependencies": { "hogan.js": "*" },
+  "keywords": [
+    "mustache",
+    "hogan",
+    "express"
+  ],
+  "author": "Jonathan Hawkes",
+  "license": "MIT"
+}
