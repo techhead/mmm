@@ -4,10 +4,11 @@
   featuring [Hogan.js](https://github.com/twitter/hogan.js)
 
 Supports
-* caching
-* partials
-* layout
-* presentation logic (*outside* of logicless template, of course)
+
++ caching
++ partials
++ layout
++ presentation logic (*outside* of logicless template, of course)
 
 ## Install
 
