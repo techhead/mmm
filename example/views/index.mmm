@@ -1,1 +1,3 @@
 <p>Welcome to {{ title }}</p>
+<p>It is {{time}}.</p>
+

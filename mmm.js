@@ -33,11 +33,56 @@ function fcompile(path, options, cache) {
     text = fs.readFileSync(path, 'utf8');
     template = Hogan.generate(Hogan.parse(Hogan.scan(text, options.delimiters), text, options), text, options);
 
+    if (fs.existsSync(path + '.js')) {
+
+        // The context passed to `template.render()` is the Model (or at least a subset)
+        // in the Model-View-Controller pattern.  However, this Model must often be
+        // augmented, formatted, etc. in the View for a proper presentation.
+        // This presentation logic still belongs to the view, but is oftentimes crammed
+        // into the controller for convenience.  This is sloppy and violates the spirit of MVC.
+
+        // This experimental feature provides a convenient pattern for the placement
+        // of presentation logic in your view.
+        fixTemplateContext(template, loadViewModule(path + '.js'));
+    }
+
     if (cache) {
         fcache[key] = template;
     }
 
     return template;
+}
+
+/**
+ * Returns a function that takes a hash as an input
+ * and returns a specialized 'view' object,
+ * complete with presentation logic (eg. view helpers).
+ *
+ * This may be brittle, as it hijacks the internals of node.js Module.
+ */
+function loadViewModule(path) {
+    var Module = module.constructor,
+        _module = new Module(path,module);
+    _module.load(path);
+    return (typeof _module.exports === 'function') ? _module.exports :
+        function(context) {
+            return extend(_module.exports, context);
+        };
+}
+
+/**
+ * Override the `template.r()` method of the `Hogan.Template`.
+ * to modify/replace the context at the top of the stack.
+ *
+ * This may be brittle, as `.r()` might be considered an internal method.
+ */
+function fixTemplateContext(template, fix) {
+    var _template_r = template.r;
+    template.r = function(contextStack) {
+        var context = contextStack[contextStack.length-1];
+        contextStack[contextStack.length-1] = fix(context);
+        return _template_r.apply(this,arguments);
+    };
 }
 
 /**
@@ -76,9 +121,6 @@ function extend(a,b) {
  *   - `Hogan` or `settings.Hogan`  Options passed to `Hogan.compile(text,options)`
  *   - `layout` or `settings.layout`
  *   - `partials` or `settings.partials`
- *
- * @param {String} path
- * @param {Object} options
  */
 function render(path, options) {
 
@@ -118,7 +160,7 @@ function render(path, options) {
         partials.content = _template;
     }
 
-    /*!
+    /*
      * Ensure that all referenced partials are resolved,
      * compiled and cached within `view.partials`.
      */

@@ -1,6 +1,6 @@
 {
   "name": "mmm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Mustache Marked Media - View Engine for Express 3",
   "main": "mmm.js",
   "scripts": {
