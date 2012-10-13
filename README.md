@@ -4,10 +4,10 @@
   featuring [Hogan.js](https://github.com/twitter/hogan.js)
 
 Supports
-  - caching
-  - partials
-  - layout
-  - presentation logic (*outside* of logicless template, of course)
+* caching
+* partials
+* layout
+* presentation logic (*outside* of logicless template, of course)
 
 ## Install
 
@@ -49,11 +49,13 @@ Example:
     res.render('page', {a: 3});
 
 page.mmm
+
 ```
 {{a}} {{b}} {{c}}
 ```
 
 result:
+
 ```
 3 2 1
 ```
@@ -67,6 +69,7 @@ Partials may be explicitly set or automatically loaded from the file system.
     app.render('page', { partials: { menu: '<ul><li>item</li></ul>' } }); // Define partial at render
 
 page.mmm
+
 ```
 {{>header}}
 {{>menu}}
@@ -74,6 +77,7 @@ page.mmm
 ```
 
 footer.mmm
+
 ```
 {{=<% %>=}}
 This template will be included in page.mmm automatically if {{>footer}} is not otherwise resolved.
@@ -95,7 +99,7 @@ Layout is implemented using partials.  A layout should contain a partial named '
 
 ```
 The content will go here --> {{> content}}
-````
+```
 
 ### Presentation Logic
 
@@ -128,11 +132,13 @@ The Mustache Marked Media module (mmm) has an established pattern for "binding" 
 view.  Its use is, of course, completely optional.  See the following example.
 
 page.mmm
+
 ```
 Today's date is {{formattedDate}}.
 ```
 
 page.mmm.js
+
 ```
 exports.formattedDate = function() {
   return this.date.toLocaleDateString();
@@ -142,6 +148,7 @@ exports.formattedDate = function() {
 ... or alternatively ...
 
 page.mmm.js
+
 ```
 module.exports = function(context) {
   context.formattedDate = context.date.toISOString();
