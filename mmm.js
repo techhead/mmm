@@ -2,7 +2,8 @@ var Hogan,
     extname = require('path').extname,
     fs = require('fs'),
 
-    fcache = {};
+    fcache = {},
+    fcacheKey;
 
 try {
     // Prefer TECHHEAD fork
@@ -15,9 +16,14 @@ try {
  * Analog to `Hogan.cacheKey()` (as of Hogan 3.0.0)
  * but uses path name instead of template text.
  */
-function fcacheKey(path, options) {
-    return [path, !!options.asString, !!options.disableLambda, options.delimiters||'{{ }}'].join('||');
-}
+fcacheKey = !!Hogan.cacheKey ? Hogan.cacheKey : function(path, options) {
+    return [
+        path,
+        options.delimiters || '{{ }}',
+        !!options.asString,
+        !!options.disableLambda
+    ].join('||');
+};
 
 /**
  * Analog to `Hogan.compile()`
@@ -69,7 +75,7 @@ function fcompile(path, options, cache) {
 function getExistsSync(path, exts) {
     for (var i=0,len=exts.length; i<len; i++) {
         if (fs.existsSync(path + exts[i])) {
-          return path + exts[i];
+            return path + exts[i];
         }
     }
     return false;
