@@ -3,6 +3,9 @@
 [Mustache](http://mustache.github.com/) Marked Media - View Engine for [Express 3](http://expressjs.com/),
   featuring [Hogan.js](https://github.com/twitter/hogan.js)
 
+Project [mmm](https://github.com/techhead/mmm) now prefers
+  the [TECHHEAD fork of Hogan.js](https://github.com/techhead/hogan.js).
+
 Supports
 
 + caching

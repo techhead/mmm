@@ -1,8 +1,15 @@
-var Hogan = require('hogan.js'),
+var Hogan,
     extname = require('path').extname,
     fs = require('fs'),
 
     fcache = {};
+
+try {
+    // Prefer TECHHEAD fork
+    Hogan = require('techhead-hogan');
+} catch (ex) {
+    Hogan = require('hogan.js');
+}
 
 /**
  * Analog to `Hogan.cacheKey()` (as of Hogan 3.0.0)
@@ -33,7 +40,8 @@ function fcompile(path, options, cache) {
     text = fs.readFileSync(path, 'utf8');
     template = Hogan.generate(Hogan.parse(Hogan.scan(text, options.delimiters), text, options), text, options);
 
-    if (fs.existsSync(path + '.js')) {
+    path = getExistsSync(path, Object.keys(require.extensions));
+    if (path) {
 
         // The context passed to `template.render()` is the Model (or at least a subset)
         // in the Model-View-Controller pattern.  However, this Model must often be
@@ -43,7 +51,7 @@ function fcompile(path, options, cache) {
 
         // This experimental feature provides a convenient pattern for the placement
         // of presentation logic in your view.
-        fixTemplateContext(template, loadViewModule(path + '.js'));
+        fixTemplateContext(template, loadViewModule(path));
     }
 
     if (cache) {
@@ -51,6 +59,20 @@ function fcompile(path, options, cache) {
     }
 
     return template;
+}
+
+/**
+ * Takes a path and array of file extensions
+ * and returns the first path + extension that exists
+ * or returns false.
+ */
+function getExistsSync(path, exts) {
+    for (var i=0,len=exts.length; i<len; i++) {
+        if (fs.existsSync(path + exts[i])) {
+          return path + exts[i];
+        }
+    }
+    return false;
 }
 
 /**
