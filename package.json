@@ -1,13 +1,13 @@
 {
-  "name": "mmm",
+  "name": "mmm-vanillahogan",
   "version": "0.2.1",
   "description": "Mustache Marked Media - View Engine for Express 3",
   "main": "mmm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git://github.com/techhead/mmm",
-  "dependencies": { "techhead-hogan": "*" },
+  "repository": "git://github.com/philbooth/mmm.git",
+  "dependencies": { "hogan.js": "2.0.x" },
   "keywords": [
     "mustache",
     "hogan",
