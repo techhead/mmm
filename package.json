@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git://github.com/philbooth/mmm.git",
-  "dependencies": { "hogan.js": "2.0.x" },
+  "dependencies": { "techhead-hogan": "*", "hogan.js": "*" },
   "keywords": [
     "mustache",
     "hogan",
