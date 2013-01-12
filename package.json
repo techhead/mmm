@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git://github.com/philbooth/mmm.git",
+  "repository": "git://github.com/techhead/mmm",
   "dependencies": { "techhead-hogan": "*", "hogan.js": "*" },
   "keywords": [
     "mustache",
