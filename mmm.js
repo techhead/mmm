@@ -247,3 +247,11 @@ exports.__express = function(path, options, fn) {
         fn(error);
     }
 };
+
+exports.setEngine = function(engine) {
+    if (typeof engine === 'string') {
+        Hogan = require(engine);
+    } else {
+        Hogan = engine;
+    }
+};
