@@ -1,23 +1,5 @@
 # mmm
 
-This is a fork of
-[Jonathan Hawkes][jonathan]'
-[mmm] project.
-The only change
-is to depend
-on the original fork of
-[Hogan.js][hogan]
-rather than the
-[Techhead]
-fork.
-
-[jonathan]: https://github.com/techhead
-[mmm]: https://github.com/techhead/mmm
-[hogan]: https://github.com/twitter/hogan.js
-[techhead]: https://github.com/techhead/hogan.js
-
-The original readme document follows:
-
 [Mustache](http://mustache.github.com/) Marked Media - View Engine for [Express 3](http://expressjs.com/),
   featuring [Hogan.js](https://github.com/twitter/hogan.js)
 
