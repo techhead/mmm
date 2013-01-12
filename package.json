@@ -1,6 +1,6 @@
 {
-  "name": "mmm-vanillahogan",
-  "version": "0.2.1",
+  "name": "mmm",
+  "version": "0.2.2",
   "description": "Mustache Marked Media - View Engine for Express 3",
   "main": "mmm.js",
   "scripts": {
