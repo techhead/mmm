@@ -3,9 +3,6 @@
 [Mustache](http://mustache.github.com/) Marked Media - View Engine for [Express 3](http://expressjs.com/),
   featuring [Hogan.js](https://github.com/twitter/hogan.js)
 
-Project [mmm](https://github.com/techhead/mmm) now prefers
-  the [TECHHEAD fork of Hogan.js](https://github.com/techhead/hogan.js).
-
 Supports
 
 + caching
@@ -34,6 +31,21 @@ And if you want caching...
 To set an app-wide layout...
 
     app.set('layout', 'responsive-layout'); // will look for a layout named 'responsive-layout.mmm' in 'views' directory
+
+By default, [mmm](https://github.com/techhead/mmm) prefers the
+[TECHHEAD fork of Hogan.js](https://github.com/techhead/hogan.js).
+However, you can control this behaviour at runtime by calling
+`setEngine`, like so:
+
+```
+mmm = require('mmm');
+
+// Use the original fork of Hogan.js
+mmm.setEngine('hogan.js');
+
+app.set('view engine', 'html');
+app.engine('html', mmm.__express);
+```
 
 ### Rendering
 
